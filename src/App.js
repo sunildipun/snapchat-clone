@@ -10,8 +10,6 @@ import Preview from './component/Preview/Preview.component';
 function App() {
   return (
     <div className="app">
-      <h2> Let build snapchat 🚀 </h2>
-
         <Router>
           <div className="app__body">
             <Switch>
