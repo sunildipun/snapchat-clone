@@ -1,4 +1,7 @@
 import React, {useRef, useCallback} from 'react';
+
+import './WebCamCapture.style.css';
+
 import WebCam from 'react-webcam';
 import {useDispatch} from 'react-redux';
 
