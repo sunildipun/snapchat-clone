@@ -1,4 +1,4 @@
-import React, {useRef, useCallback, useState} from 'react';
+import React, {useRef, useCallback} from 'react';
 import WebCam from 'react-webcam';
 import {useDispatch} from 'react-redux';
 
@@ -12,8 +12,9 @@ const videoConstraints = {
 }
 
 const WebCamCapture = () => {
+    
+    const dispatch = useDispatch();
     const webCamRef = useRef(null);
-   const dispatch = useDispatch();
     // const [image, setImage] = useState(null);
 
     const capture = useCallback(
