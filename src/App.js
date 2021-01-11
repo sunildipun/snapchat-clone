@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import WebCamCapture from './component/WebCamCapture/WebCamCapture.component';
 import Preview from './component/Preview/Preview.component';
+import Chats from './component/Chats/Chats.component';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
               </Route>
               <Route exact path="/">
                 <WebCamCapture />
+              </Route>
+              <Route path="/chats">
+                <Chats />
               </Route>
             </Switch>
           </div>
