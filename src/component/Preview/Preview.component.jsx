@@ -5,7 +5,8 @@ import { selectCameraImage, resetCameraImage } from '../../features/cameraSlice'
 import './Preview.style.css';
 
 import {v4 as uuid} from 'uuid';
-import {storage} from './../../firebase';
+import {db, storage} from './../../firebase';
+import firebase from 'firebase';
 
 import CloseIcon from '@material-ui/icons/Close';
 import TextFieldsIcon from '@material-ui/core/icon';
@@ -38,7 +39,20 @@ const Preview = () => {
         const id = uuid();
         const uploadtask = storage.ref(`posts/${id}`).putString(cameraImage, "data_url");
 
-        uploadtask.on('state_changed')
+        uploadtask.on('state_changed', null, (error) => {
+            console.log(error);
+        }, () => {
+            storage.ref('posts').child(id).getDownloadURL().then(url => {
+                db.collection('posts').add({
+                    imageUrl: url,
+                    userName: 'Sunil',
+                    read: false,
+                    // profilePic,
+                    timeStamp: firebase.firestore.FieldValue.serverTimestamp()
+                })
+                history.push('/chats');
+            });
+        });
     }
 
     return (
