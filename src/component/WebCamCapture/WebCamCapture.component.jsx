@@ -30,7 +30,7 @@ const WebCamCapture = () => {
             dispatch(setCameraImage(imageSrc));
             history.push('/preview');
         },
-        [webCamRef]
+        [webCamRef, history, dispatch]
     )
 
     return (
