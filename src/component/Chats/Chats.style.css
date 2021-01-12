@@ -41,3 +41,17 @@
     background-color: #059ee0;
     height: 50px;
 }
+
+.chats__posts {
+    height: 350px;
+    margin-top: -9px;
+    background-color: #fff;
+    box-shadow: 1px -7px 7px -6px rgba(0,0,0,0.44);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    overflow: scroll;
+}
+
+.chats__posts::-webkit-scrollbar {
+    display: none;
+}

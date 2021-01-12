@@ -1,5 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './Chats.style.css';
+
+import ChatItem from "./../ChatItem/ChatItem.component";
+
+import {db} from './../../firebase'
 
 import  { Avatar } from '@material-ui/core';
 
@@ -8,6 +12,17 @@ import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 
 
 const Chats = () => {
+    const [posts, setPost] = useState([]);
+
+    useEffect(() => {
+        db.collection('posts').orderBy('timestamp','desc').onSnapshot(snap => {
+            setPost(snap.docs.map(doc => ({
+                id: doc.id,
+                data: doc.data()
+            })))
+        });
+    }, []);
+
     return (
         <div className="chats">
             <div className="chats__header">
@@ -17,6 +32,11 @@ const Chats = () => {
                     <input placeholder="Friends" type="text" />
                 </div>
                 <ChatBubbleIcon className="chats_chatIcon"/>
+            </div>
+            <div className="chats__posts">
+                {posts.map(({id, ...data}) => (
+                    <ChatItem key={id} {...data} />
+                ))}
             </div>
         </div>
     )
