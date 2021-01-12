@@ -17,10 +17,12 @@ const Chats = () => {
     useEffect(() => {
         console.log('Inside use effect');
         db.collection('posts').orderBy('timeStamp','desc').onSnapshot(snap => {
+            console.log('Snap', snap.docs);
             setPost(snap.docs.map(doc => ({
                 id: doc.id,
                 data: doc.data()
             })))
+            console.log('Posts', posts);
         });
     }, []);
 
@@ -35,8 +37,8 @@ const Chats = () => {
                 <ChatBubbleIcon className="chats_chatIcon"/>
             </div>
             <div className="chats__posts">
-                {posts.map(({id, ...data}) => (
-                    <ChatItem key={id} {...data} />
+                {posts.map(({id, data: {profilePic, userName, timeStamp, imageUrl, read}}) => (
+                    <ChatItem key={id} profilePic={profilePic} userName={userName} imageUrl={imageUrl} timeStamp={timeStamp} read={read} />
                 ))}
             </div>
         </div>
