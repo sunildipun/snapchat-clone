@@ -15,7 +15,8 @@ const Chats = () => {
     const [posts, setPost] = useState([]);
 
     useEffect(() => {
-        db.collection('posts').orderBy('timestamp','desc').onSnapshot(snap => {
+        console.log('Inside use effect');
+        db.collection('posts').orderBy('timeStamp','desc').onSnapshot(snap => {
             setPost(snap.docs.map(doc => ({
                 id: doc.id,
                 data: doc.data()
